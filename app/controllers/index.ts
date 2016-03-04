@@ -20,11 +20,9 @@ class MyApplication {
   }
 
   onReady() {
-    const manager = new wm.WindowManager();
-    manager.create();
-    manager.create();
-    manager.create();
-    manager.status();
+    let manager = new wm.WindowManager();
+    manager.create("config");
+    manager.create("hello");
 
     osProcess.exec("ls -l", function(err, stdout, stderr){
       console.log(stdout);
