@@ -26,6 +26,7 @@ export class WindowManager {
       } );
       // type desktop can not be movable
 
+      // TODO: load URL from config
       window.loadURL("file://" + __dirname + "/../views/index.html");
 
       // when the window is closing, save the position

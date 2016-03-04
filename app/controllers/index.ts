@@ -1,9 +1,14 @@
 /// <reference path="../../typings/github-electron/github-electron.d.ts" />
-/// <reference path="../models/WindowManager.ts"/>``
+/// <reference path="../models/WindowManager.ts"/>
+/// <reference path="../models/MenuManager.ts"/>
+
 
 import electron = require("electron");
 import osProcess = require("child_process");
 import wm = require("../models/WindowManager");
+import mm = require("../models/MenuManager");
+
+
 
 const app: Electron.App = electron.app;
 
@@ -23,6 +28,8 @@ class MyApplication {
     let manager = new wm.WindowManager();
     manager.create("config");
     manager.create("hello");
+
+    let m = new mm.MenuManager();
 
     osProcess.exec("ls -l", function(err, stdout, stderr){
       console.log(stdout);
