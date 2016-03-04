@@ -25,7 +25,7 @@ class MyApplication {
   }
 
   onReady() {
-    let manager = new wm.WindowManager();
+    let manager = wm.WindowManager.getManager();
     manager.create("config");
     manager.create("hello");
 

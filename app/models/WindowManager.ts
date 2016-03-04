@@ -3,7 +3,20 @@ import Electron = require("electron");
 const storage = require("electron-json-storage");
 
 export class WindowManager {
+  private static singleton: WindowManager = null;
+  windows: Electron.BrowserWindow[];
+
   constructor() {
+    if (WindowManager.singleton) {
+      throw new Error("must use the getInstance.");
+    }
+    WindowManager.singleton = this;
+  }
+  public static getManager(): WindowManager {
+    if (WindowManager.singleton === null) {
+      WindowManager.singleton = new WindowManager();
+    }
+    return WindowManager.singleton;
   }
 
   // restore window from `name` file
@@ -37,6 +50,8 @@ export class WindowManager {
           width: window.getSize()[0],
           height: window.getSize()[1]
         };
+        console.log("closing: " + name);
+        console.log(position);
         storage.set(name, position, function (error) {
           if (error) throw error;
         });
