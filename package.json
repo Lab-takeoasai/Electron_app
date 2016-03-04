@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/takeo-asai/Electron_app/issues"
   },
-  "homepage": "https://github.com/takeo-asai/Electron_app#readme"
+  "homepage": "https://github.com/takeo-asai/Electron_app#readme",
+  "dependencies": {
+    "electron-json-storage": "^2.0.0"
+  }
 }

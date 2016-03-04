@@ -24,6 +24,7 @@ class MyApplication {
     manager.create();
     manager.create();
     manager.create();
+    manager.status();
 
     osProcess.exec("ls -l", function(err, stdout, stderr){
       console.log(stdout);
