@@ -30,10 +30,10 @@ class MyApplication {
     manager.create("hello");
 
     let m = new mm.MenuManager();
-
+/*
     osProcess.exec("ls -l", function(err, stdout, stderr){
       console.log(stdout);
-    });
+    });*/
   }
 }
 

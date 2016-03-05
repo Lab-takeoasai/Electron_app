@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="test">
 <head>
   <title>Hello TypeScript</title>
   <script src="./angular.min.js"></script>
@@ -12,12 +12,16 @@
     color: #FFFFFF;
   }
 </style>
+<script src="../controllers/shell.js"></script>
 </head>
 <body>
   <h1>Hello TypeScript</h1>
   <input type="text" ng-model="name">
   <div>hello {{ name }}</div>
   <div ng-controller="stdout">
+    <div>
+      {{ data }}
+    </div>
   </div>
 </body>
 </html>
