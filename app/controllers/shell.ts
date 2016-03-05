@@ -9,16 +9,18 @@ import angular = require("angular");
 
 
 class Script {
+  name: string;
   command: string;
   interval: number;
 
-  constructor(cmd: string, interval: number) {
+  constructor(name: string, cmd: string, interval: number) {
+    this.name = name;
     this.command = cmd;
     this.interval = interval;
   }
 
   exec() {
-    let app = angular.module("test", []);
+    let app = angular.module(this.name, []);
     app.controller("stdout", ["$scope", "$interval", ($scope, $interval) => {
       $interval( () =>
       osProcess.exec(this.command, (err, stdout, stderr) => {
@@ -30,5 +32,5 @@ class Script {
   }
 }
 
-let s = new Script("ps -amcwwwxo \"command %mem %cpu\" | grep -v grep | head -13", 1000);
+let s = new Script("test", "ps -amcwwwxo \"command %mem %cpu\" | grep -v grep | head -13", 1000);
 s.exec();
