@@ -8,21 +8,21 @@ export class WindowManager {
   windowNames: string[];
 
   // WindowManager is a singleton class
-  private static singleton: WindowManager = null;
+  private static wmSingleton: WindowManager = null;
   constructor() {
-    if (WindowManager.singleton) {
+    if (WindowManager.wmSingleton) {
       throw new Error("must use the getInstance.");
     }
     this.visble = false;
     this.windows = [];
     this.windowNames = [];
-    WindowManager.singleton = this;
+    WindowManager.wmSingleton = this;
   }
   public static getManager(): WindowManager {
-    if (WindowManager.singleton === null) {
-      WindowManager.singleton = new WindowManager();
+    if (WindowManager.wmSingleton === null) {
+      WindowManager.wmSingleton = new WindowManager();
     }
-    return WindowManager.singleton;
+    return WindowManager.wmSingleton;
   }
 
 

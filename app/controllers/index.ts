@@ -29,8 +29,7 @@ class MyApplication {
     manager.create("config");
     manager.create("hello");
 
-    //let m = mm.MenuManager.getManager();
-    let m = new mm.MenuManager();
+    let m = mm.MenuManager.getManager();
 
   }
 }

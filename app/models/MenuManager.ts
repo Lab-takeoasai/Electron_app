@@ -8,31 +8,11 @@ const WindowManager = require("./WindowManager").WindowManager;
 const SUPPORT_URL = "https://github.com/takeo-asai/Electron_app/";
 
 export class MenuManager {
-/*
-  // WindowManager is a singleton class
-  private static singleton: MenuManager = null;
-  constructor() {
-    if (WindowManager.singleton) {
-      throw new Error("must use the getInstance.");
-    }
-    MenuManager.singleton = this;
-
-    //template.push(this.appleMenu());
-    //template.push(this.helpMenu());
-
-    let menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
-  }
-  public static getManager(): MenuManager {
-    if (WindowManager.singleton === null) {
-      WindowManager.singleton = new WindowManager();
-    }
-    return WindowManager.singleton;
-  }
+  private static mmSingleton: MenuManager = null;
 
 
+  // MenuManager is a singleton class
 
-*/
 
   helpMenu() {
     let menu = {
@@ -79,6 +59,10 @@ export class MenuManager {
   }
 
   constructor() {
+    if (WindowManager.mmSingleton) {
+      throw new Error("must use the getInstance.");
+    }
+
     let template = [];
     template.push(this.viewMenu());
     template.push(this.helpMenu());
@@ -86,6 +70,14 @@ export class MenuManager {
 
     let menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
+
+    MenuManager.mmSingleton = this;
+  }
+  public static getManager(): MenuManager {
+    if (MenuManager.mmSingleton === null) {
+      MenuManager.mmSingleton = new MenuManager();
+    }
+    return MenuManager.mmSingleton;
   }
 
 }
