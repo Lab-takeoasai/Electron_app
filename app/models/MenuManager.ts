@@ -7,13 +7,34 @@ const WindowManager = require("./WindowManager").WindowManager;
 
 const SUPPORT_URL = "https://github.com/takeo-asai/Electron_app/";
 
+// MenuManager is a singleton class
 export class MenuManager {
   private static mmSingleton: MenuManager = null;
 
+  constructor() {
+    if (WindowManager.mmSingleton) {
+      throw new Error("must use the getInstance.");
+    }
 
-  // MenuManager is a singleton class
+    // initialize default menubar
+    let template = [];
+    template.push(this.viewMenu());
+    template.push(this.helpMenu());
+    template.unshift(this.appleMenu());
 
+    let menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
 
+    MenuManager.mmSingleton = this;
+  }
+  public static getManager(): MenuManager {
+    if (MenuManager.mmSingleton === null) {
+      MenuManager.mmSingleton = new MenuManager();
+    }
+    return MenuManager.mmSingleton;
+  }
+
+  // each MenuItem is divided as a function
   helpMenu() {
     let menu = {
       label: "Help", role: "help",
@@ -57,27 +78,4 @@ export class MenuManager {
     };
     return menu;
   }
-
-  constructor() {
-    if (WindowManager.mmSingleton) {
-      throw new Error("must use the getInstance.");
-    }
-
-    let template = [];
-    template.push(this.viewMenu());
-    template.push(this.helpMenu());
-    template.unshift(this.appleMenu());
-
-    let menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
-
-    MenuManager.mmSingleton = this;
-  }
-  public static getManager(): MenuManager {
-    if (MenuManager.mmSingleton === null) {
-      MenuManager.mmSingleton = new MenuManager();
-    }
-    return MenuManager.mmSingleton;
-  }
-
 }

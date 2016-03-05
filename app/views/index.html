@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="test">
+<html ng-app="default">
 <head>
-  <title>Hello TypeScript</title>
+  <title></title>
   <style>
   body {
-    -webkit-app-region: drag; /* ドラッグ可能に */
-    /*-webkit-user-select: none;*/ /* ドラッグはテキスト選択と競合するので禁止 */
-
+    -webkit-app-region: drag;
     font-size: 16px;
     color: #FFFFFF;
   }
@@ -14,13 +12,10 @@
 <script src="../models/Script.js"></script>
 </head>
 <body>
-  <h1>Hello TypeScript</h1>
-  <input type="text" ng-model="name">
-  <div>hello {{ name }}</div>
   <div ng-controller="stdout">
-    <div>
+    <pre><code>
       {{ data }}
-    </div>
+    </code></pre>
   </div>
 </body>
 </html>

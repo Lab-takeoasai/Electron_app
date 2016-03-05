@@ -5,8 +5,10 @@
 
 import electron = require("electron");
 import osProcess = require("child_process");
-import wm = require("../models/WindowManager");
-import mm = require("../models/MenuManager");
+
+
+const WindowManager = require("../models/WindowManager").WindowManager;
+const MenuManager = require("../models/MenuManager").MenuManager;
 
 
 
@@ -25,11 +27,11 @@ class MyApplication {
   }
 
   onReady() {
-    let manager = wm.WindowManager.getManager();
+    let manager = WindowManager.getManager();
     manager.create("config");
     manager.create("hello");
 
-    let m = mm.MenuManager.getManager();
+    MenuManager.getManager();
 
   }
 }

@@ -1,13 +1,14 @@
 /// <reference path="../../typings/github-electron/github-electron.d.ts" />
-import Electron = require("electron");
+
+const Electron = require("electron");
 const storage = require("electron-json-storage");
 
+// WindowManager is a singleton class
 export class WindowManager {
   visble: boolean;
   windows: Electron.BrowserWindow[];
   windowNames: string[];
 
-  // WindowManager is a singleton class
   private static wmSingleton: WindowManager = null;
   constructor() {
     if (WindowManager.wmSingleton) {
@@ -25,8 +26,7 @@ export class WindowManager {
     return WindowManager.wmSingleton;
   }
 
-
-  //
+  // toggle visible to move each widge
   toggleVisible() {
     for (let window of this.windows) {
       window.close();
@@ -54,6 +54,7 @@ export class WindowManager {
 
         // TODO: load URL from config
         window.loadURL("file://" + __dirname + "/../views/index.html");
+      //  window.loadURL("http://www.google.com/"); // works fine
 
         // when the window is closing, save the position
         window.on("close", () => {
@@ -63,17 +64,15 @@ export class WindowManager {
             width: window.getSize()[0],
             height: window.getSize()[1]
           };
-          console.log("closing: " + name);
-          console.log(position);
           storage.set(name, position, function (error) {
             if (error) throw error;
           });
+
           window = null;
         });
       }
     });
   }
-
 
   private createWindow(config, visible: boolean): Electron.BrowserWindow {
     let window = new Electron.BrowserWindow( {
@@ -86,10 +85,9 @@ export class WindowManager {
       acceptFirstMouse: true,
       transparent: !visible,
       frame: visible,
-    //  type: "desktop", // type desktop can not be movable
+//      type: visible ? "textured" : "desktop", // type desktop can not be movable
       titleBarStyle: "hidden"
     } );
     return window;
   }
-
 }
