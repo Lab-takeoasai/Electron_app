@@ -1,7 +1,9 @@
 /// <reference path="../../typings/github-electron/github-electron.d.ts" />
+/// <reference path="../../typings/glob/glob.d.ts" />
 
 const Electron = require("electron");
 const storage = require("electron-json-storage");
+const glob = require("glob");
 
 // WindowManager is a singleton class
 export class WindowManager {
@@ -40,6 +42,13 @@ export class WindowManager {
       console.log(name);
       this.create(name);
     }
+  }
+
+  restoreFromJsons() {
+    let path = Electron.app.getPath("userData");
+    glob(path + "/*.json", (err, matches) => {
+      console.log(matches);
+    });
   }
 
   // restore window from `name` file

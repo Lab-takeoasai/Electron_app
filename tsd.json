@@ -9,7 +9,7 @@
       "commit": "ba4c4fc6c9ec3d1b9b7e26437d6e0f4f8337c948"
     },
     "node/node.d.ts": {
-      "commit": "ba4c4fc6c9ec3d1b9b7e26437d6e0f4f8337c948"
+      "commit": "9f0f926a12026287b5a4a229e5672c01e7549313"
     },
     "angularjs/angular-animate.d.ts": {
       "commit": "9f0f926a12026287b5a4a229e5672c01e7549313"
@@ -39,6 +39,12 @@
       "commit": "9f0f926a12026287b5a4a229e5672c01e7549313"
     },
     "angularjs/legacy/angular-scenario-1.2.d.ts": {
+      "commit": "9f0f926a12026287b5a4a229e5672c01e7549313"
+    },
+    "glob/glob.d.ts": {
+      "commit": "9f0f926a12026287b5a4a229e5672c01e7549313"
+    },
+    "minimatch/minimatch.d.ts": {
       "commit": "9f0f926a12026287b5a4a229e5672c01e7549313"
     }
   }

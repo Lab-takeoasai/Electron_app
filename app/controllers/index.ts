@@ -4,14 +4,9 @@
 
 
 import electron = require("electron");
-import osProcess = require("child_process");
-
 
 const WindowManager = require("../models/WindowManager").WindowManager;
 const MenuManager = require("../models/MenuManager").MenuManager;
-
-
-
 const app: Electron.App = electron.app;
 
 class MyApplication {
@@ -28,11 +23,11 @@ class MyApplication {
 
   onReady() {
     let manager = WindowManager.getManager();
+    manager.restoreFromJsons();
     manager.create("config");
     manager.create("hello");
 
     MenuManager.getManager();
-
   }
 }
 
