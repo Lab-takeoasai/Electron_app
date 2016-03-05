@@ -3,6 +3,7 @@ import Electron = require("electron");
 const storage = require("electron-json-storage");
 
 export class WindowManager {
+  visble: boolean;
   windows: Electron.BrowserWindow[];
   windowNames: string[];
 
@@ -12,6 +13,7 @@ export class WindowManager {
     if (WindowManager.singleton) {
       throw new Error("must use the getInstance.");
     }
+    this.visble = false;
     this.windows = [];
     this.windowNames = [];
     WindowManager.singleton = this;
@@ -24,48 +26,51 @@ export class WindowManager {
   }
 
 
-  test() {
-    console.log("haaaaaa");
-  }
-
   //
   toggleVisible() {
     for (let window of this.windows) {
       window.close();
     }
     this.windows = [];
+
+    let names = this.windowNames;
+    this.visble = !this.visble;
+    this.windowNames = [];
+    for (let name of names) {
+      console.log(name);
+      this.create(name);
+    }
   }
 
   // restore window from `name` file
   create(name: string) {
     storage.get(name, (error, config) => {
       if (error) throw error;
+      if (this.windowNames.indexOf(name) === -1) {
 
-      this.test();
+        let window = this.createWindow(config, this.visble);
+        this.windows.push(window);
+        this.windowNames.push(name);
 
-      let window = this.createWindow(config, false);
-      this.windows.push(window);
-      this.windowNames.push(name);
-      // type desktop can not be movable
+        // TODO: load URL from config
+        window.loadURL("file://" + __dirname + "/../views/index.html");
 
-      // TODO: load URL from config
-      window.loadURL("file://" + __dirname + "/../views/index.html");
-
-      // when the window is closing, save the position
-      window.on("close", () => {
-        let position = {
-          x: window.getPosition()[0],
-          y: window.getPosition()[1],
-          width: window.getSize()[0],
-          height: window.getSize()[1]
-        };
-        console.log("closing: " + name);
-        console.log(position);
-        storage.set(name, position, function (error) {
-          if (error) throw error;
+        // when the window is closing, save the position
+        window.on("close", () => {
+          let position = {
+            x: window.getPosition()[0],
+            y: window.getPosition()[1],
+            width: window.getSize()[0],
+            height: window.getSize()[1]
+          };
+          console.log("closing: " + name);
+          console.log(position);
+          storage.set(name, position, function (error) {
+            if (error) throw error;
+          });
+          window = null;
         });
-        window = null;
-      });
+      }
     });
   }
 
@@ -81,9 +86,10 @@ export class WindowManager {
       acceptFirstMouse: true,
       transparent: !visible,
       frame: visible,
-    //  type: "desktop",
+    //  type: "desktop", // type desktop can not be movable
       titleBarStyle: "hidden"
     } );
     return window;
   }
+  
 }

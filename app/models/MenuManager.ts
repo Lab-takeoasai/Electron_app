@@ -1,5 +1,8 @@
 /// <reference path="../../typings/github-electron/github-electron.d.ts" />
+/// <reference path="./WindowManager.ts"/>
+
 import Electron = require("electron");
+import wm = require("./WindowManager");
 
 
 const Menu = Electron.Menu;
@@ -20,6 +23,12 @@ export class MenuManager {
               if (focusedWindow)
                 focusedWindow.reload();
             }
+          },
+          {
+            label: "Show visible",
+            click: (item, focusedWindow) => {
+              wm.WindowManager.getManager().toggleVisible();
+            }
           }
         ]
       },
@@ -37,7 +46,7 @@ export class MenuManager {
 
 
     let menu = Menu.buildFromTemplate(template);
-    //Menu.setApplicationMenu(menu);
+    Menu.setApplicationMenu(menu);
 
     console.log("loaded");
   }
