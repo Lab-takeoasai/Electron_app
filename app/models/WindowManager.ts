@@ -3,13 +3,17 @@ import Electron = require("electron");
 const storage = require("electron-json-storage");
 
 export class WindowManager {
-  private static singleton: WindowManager = null;
   windows: Electron.BrowserWindow[];
+  windowNames: string[];
 
+  // WindowManager is a singleton class
+  private static singleton: WindowManager = null;
   constructor() {
     if (WindowManager.singleton) {
       throw new Error("must use the getInstance.");
     }
+    this.windows = [];
+    this.windowNames = [];
     WindowManager.singleton = this;
   }
   public static getManager(): WindowManager {
@@ -19,24 +23,29 @@ export class WindowManager {
     return WindowManager.singleton;
   }
 
+
+  test() {
+    console.log("haaaaaa");
+  }
+
+  //
+  toggleVisible() {
+    for (let window of this.windows) {
+      window.close();
+    }
+    this.windows = [];
+  }
+
   // restore window from `name` file
   create(name: string) {
-    storage.get(name, function (error, config) {
+    storage.get(name, (error, config) => {
       if (error) throw error;
 
-      let window = new Electron.BrowserWindow( {
-        x: +config["x"] || 200,
-        y: +config["y"] || 200,
-        width: +config["width"] || 200,
-        height: +config["height"] || 200,
-        minWidth: 50,
-        minHeight: 50,
-        acceptFirstMouse: true,
-        transparent: true,
-        frame: false,
-      //  type: "desktop",
-        titleBarStyle: "hidden"
-      } );
+      this.test();
+
+      let window = this.createWindow(config, false);
+      this.windows.push(window);
+      this.windowNames.push(name);
       // type desktop can not be movable
 
       // TODO: load URL from config
@@ -57,7 +66,24 @@ export class WindowManager {
         });
         window = null;
       });
-
     });
+  }
+
+
+  private createWindow(config, visible: boolean): Electron.BrowserWindow {
+    let window = new Electron.BrowserWindow( {
+      x: +config["x"] || 200,
+      y: +config["y"] || 200,
+      width: +config["width"] || 200,
+      height: +config["height"] || 200,
+      minWidth: 50,
+      minHeight: 50,
+      acceptFirstMouse: true,
+      transparent: !visible,
+      frame: visible,
+    //  type: "desktop",
+      titleBarStyle: "hidden"
+    } );
+    return window;
   }
 }
