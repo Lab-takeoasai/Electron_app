@@ -41,13 +41,45 @@ export class MenuManager {
             click: function() { require("electron").shell.openExternal("http://electron.atom.io") }
           },
         ]
-      },
+      }
     ];
 
-
+    if (process.platform === "darwin") {
+      let name = app.getName();
+      template.unshift({
+        label: name,
+        submenu: [
+          /*{
+            label: "About" + name,
+            role: "about"
+          },
+          {
+            type: "separator"
+          },
+          {
+            type: "separator"
+          },
+          {
+            label: "Hide Others",
+            accelerator: "Command+Alt+H",
+            role: "hideothers"
+          },
+          {
+            label: "Show All",
+            role: "unhide"
+          },
+          {
+            type: "separator"
+          },*/
+          {
+            label: "Quit",
+            accelerator: "Command+Q",
+            click: function() { app.quit(); }
+          },
+        ]
+      });
+    }
     let menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
-
-    console.log("loaded");
   }
 }
