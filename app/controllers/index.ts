@@ -29,11 +29,9 @@ class MyApplication {
     manager.create("config");
     manager.create("hello");
 
+    //let m = mm.MenuManager.getManager();
     let m = new mm.MenuManager();
-/*
-    osProcess.exec("ls -l", function(err, stdout, stderr){
-      console.log(stdout);
-    });*/
+
   }
 }
 

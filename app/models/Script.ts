@@ -1,5 +1,4 @@
 /// <reference path="../models/WindowManager.ts"/>
-/// <reference path="../models/MenuManager.ts"/>
 /// <reference path="../../typings/angularjs/angular.d.ts"/>
 /// <reference path="../../typings/github-electron/github-electron.d.ts" />
 
