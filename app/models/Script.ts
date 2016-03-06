@@ -2,7 +2,7 @@
 /// <reference path="../../typings/angularjs/angular.d.ts"/>
 /// <reference path="../../typings/github-electron/github-electron.d.ts" />
 
-import Electron = require("electron");
+const Electron = require("electron");
 import osProcess = require("child_process");
 import angular = require("angular");
 const storage = require("electron-json-storage");
@@ -13,6 +13,17 @@ class Script {
   command: string;
   interval: number;
 
+  // create symbolic link to appDir
+  static createSymlink() {
+    console.log(Electron.app.getPath("userData"));
+    /*
+    require("fs").symlink(
+  projectRoot + "/some-dir/alice.json"
+, projectRoot + "/some-dir/foo"
+, function (err) { console.log(err || "Done."); }
+);*/
+  }
+
   constructor(name: string, cmd: string, interval: number) {
     this.name = name;
     this.command = cmd;
@@ -22,6 +33,7 @@ class Script {
       if (error) throw error;
       //this.command = config["cmd"];
       //this.interval = +config["interval"];
+      console.log(config["cmd"]);
     });
   }
 
