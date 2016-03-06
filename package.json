@@ -21,6 +21,7 @@
   "dependencies": {
     "angular": "^1.5.0",
     "electron-json-storage": "^2.0.0",
+    "filecopy": "^1.0.8",
     "glob": "^7.0.3"
   }
 }

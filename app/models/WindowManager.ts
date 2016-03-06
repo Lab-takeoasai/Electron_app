@@ -1,11 +1,13 @@
 /// <reference path="../../typings/github-electron/github-electron.d.ts" />
 /// <reference path="../../typings/glob/glob.d.ts" />
 /// <reference path="./Script.ts"/>
+/// <reference path="./Symlink.ts"/>
 
 const Electron = require("electron");
 const storage = require("electron-json-storage");
 const glob = require("glob");
 const path = require("path");
+const CopyDefault = require("./Symlink").CopyDefault;
 
 // WindowManager is a singleton class
 export class WindowManager {
@@ -46,7 +48,6 @@ export class WindowManager {
     }
   }
 
-
   // restore windows from userData
   restoreFromJsons() {
     glob(Electron.app.getPath("userData") + "/*.json", (err, matches) => {
@@ -71,6 +72,7 @@ export class WindowManager {
         this.windowNames.push(name);
 
         // load URL from .html on config DIR
+        CopyDefault.copyUnlessExists(name);
         window.loadURL("file://" + Electron.app.getPath("userData") + "/" + name + ".html");
 
         // when the window is closing, save the position
