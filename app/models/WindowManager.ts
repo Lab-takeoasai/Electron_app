@@ -71,8 +71,8 @@ export class WindowManager {
         this.windowNames.push(name);
 
         // TODO: load URL from config
-        window.loadURL("file://" + __dirname + "/../views/index.html");
-      //  window.loadURL(Electron.app.getPath("userData") + "/" + name + ".html");
+      //  window.loadURL("file://" + __dirname + "/../views/index.html");
+        window.loadURL("file://" + Electron.app.getPath("userData") + "/" + name + ".html");
 
         // when the window is closing, save the position
         window.on("close", () => {

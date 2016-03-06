@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="default">
+<html ng-app="config">
 <head>
   <title></title>
   <style>
@@ -10,7 +10,11 @@
     margin: 0px;
   }
 </style>
-<script src="../models/Script.js"></script>
+<script src="./Script.js"></script>
+<script>
+var s = new Script("config", "ps -amcwwwxo \"command %mem %cpu\" | head -13", 1000);
+s.exec();
+</script>
 </head>
 <body>
   <div ng-controller="stdout">
