@@ -26,6 +26,7 @@ class Script {
       osProcess.exec(this.command, (err, stdout, stderr) => {
         $scope.$apply(function () { // $apply is needed to be displayed ASAP (because of AJAX callback)
           $scope.data = stdout;
+          $scope.error = stderr;
         });
       }), this.interval);
     }]);

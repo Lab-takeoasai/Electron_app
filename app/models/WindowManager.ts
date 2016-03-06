@@ -43,7 +43,6 @@ export class WindowManager {
     this.visble = !this.visble;
     this.windowNames = [];
     for (let name of names) {
-      console.log(name);
       this.create(name);
     }
   }
@@ -104,7 +103,7 @@ export class WindowManager {
       acceptFirstMouse: true,
       transparent: !visible,
       frame: visible,
-//      type: visible ? "textured" : "desktop", // type desktop can not be movable
+      type: visible ? "textured" : "desktop", // type desktop can not be movable
       titleBarStyle: "hidden"
     } );
     return window;

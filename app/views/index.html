@@ -5,22 +5,22 @@
   <style>
   body {
     -webkit-app-region: drag;
-    font-size: 16px;
-    color: #FFFFFF;
+    font-size: 14px;
+    color: #DDDDDD;
     margin: 0px;
   }
 </style>
 <script src="./Script.js"></script>
 <script>
-var s = new Script("config", "ps -amcwwwxo \"command %mem %cpu\" | head -13", 1000);
+var s = new Script("config", "ps -amcwwwxo \"pid command %mem %cpu\" | head -10", 1000);
 s.exec();
 </script>
 </head>
 <body>
   <div ng-controller="stdout">
-    <pre><code>
-      {{ data }}
-    </code></pre>
+    <pre>
+      {{ data }} {{ error }}
+    </pre>
   </div>
 </body>
 </html>

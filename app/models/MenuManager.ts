@@ -48,6 +48,7 @@ export class MenuManager {
       label: "Help", role: "help",
       submenu: [
         {label: "Learn More", click: () => { Electron.shell.openExternal(SUPPORT_URL); }},
+        {label: "Open Data Folder", click: () => { Electron.shell.showItemInFolder(Electron.app.getPath("userData") + "/"); }},
       ]
     };
     return menu;
