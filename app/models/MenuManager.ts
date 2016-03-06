@@ -4,12 +4,11 @@
 const Menu = require("menu");
 const Electron = require("electron");
 const WindowManager = require("./WindowManager").WindowManager;
+const Tray = Electron.Tray;
+const nativeImage = Electron.nativeImage;
+const path = require("path");
 
 const SUPPORT_URL = "https://github.com/takeo-asai/Electron_app/";
-
-
-const Tray = Electron.Tray;
-const nativeImage = require("native-image");
 
 // MenuManager is a singleton class
 export class MenuManager {
@@ -26,14 +25,13 @@ export class MenuManager {
     template.push(this.helpMenu());
     template.unshift(this.appleMenu());
 
-    let menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
-
-
-    let iconPath = __dirname + "/../../Stock_graph.png";
+    // init menubar
+    let iconPath = path.normalize(__dirname + "/../../Stock_graph.png"); // `must` normalize icon_path
     let appIcon = new Tray(nativeImage.createFromPath(iconPath));
+    let menu = Menu.buildFromTemplate(template);
     appIcon.setContextMenu(menu);
     appIcon.setToolTip("This is sample.");
+    Menu.setApplicationMenu(menu);
 
     MenuManager.mmSingleton = this;
   }
@@ -62,8 +60,6 @@ export class MenuManager {
       let menu = {
         label: name,
         submenu: [
-          {label: "test", click: () => {}},
-          {type: "separator"},
           {label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }},
         ]
       };
