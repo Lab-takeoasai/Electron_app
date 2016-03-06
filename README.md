@@ -9,8 +9,12 @@ GeekToolっぽく
   :width
   :height
 }
+
 ## name.html
   cmd: shell command
-  interval: x millsec
+  interval: x mil sec
 
-ps -amcwwwxo "command %mem %cpu" | grep -v grep | head -13
+Stock_graph.png is from
+https://www.iconfinder.com/icons/132384/graph_stock_icon#size=24
+
+CC 3.0 License

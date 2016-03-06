@@ -6,7 +6,7 @@ const Electron = require("electron");
 const angular = require("angular");
 import osProcess = require("child_process");
 
-
+// this is called by each .html
 class Script {
   name: string;
   command: string;

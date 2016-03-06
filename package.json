@@ -11,7 +11,8 @@
     "url": "git+https://github.com/takeo-asai/Electron_app.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Takeo Asai",
+  "companyName": "Takeo Asai",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/takeo-asai/Electron_app/issues"

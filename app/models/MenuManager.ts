@@ -7,6 +7,10 @@ const WindowManager = require("./WindowManager").WindowManager;
 
 const SUPPORT_URL = "https://github.com/takeo-asai/Electron_app/";
 
+
+const Tray = Electron.Tray;
+const nativeImage = require("native-image");
+
 // MenuManager is a singleton class
 export class MenuManager {
   private static mmSingleton: MenuManager = null;
@@ -24,6 +28,12 @@ export class MenuManager {
 
     let menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
+
+
+    let iconPath = __dirname + "/../../Stock_graph.png";
+    let appIcon = new Tray(nativeImage.createFromPath(iconPath));
+    appIcon.setContextMenu(menu);
+    appIcon.setToolTip("This is sample.");
 
     MenuManager.mmSingleton = this;
   }

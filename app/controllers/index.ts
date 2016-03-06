@@ -3,6 +3,8 @@
 /// <reference path="../models/MenuManager.ts"/>
 /// <reference path="../models/Symlink.ts"/>
 
+// require("crash-reporter").start();
+
 import electron = require("electron");
 
 const CreateSymLink = require("../models/Symlink").CreateSymLink;
@@ -15,6 +17,9 @@ class MyApplication {
   constructor(public app: Electron.App) {
     this.app.on("window-all-closed", this.onWindowAllClosed);
     this.app.on("ready", this.onReady);
+
+    // hide on dock
+    this.app.dock.hide();
   }
 
   onWindowAllClosed() {
@@ -29,7 +34,6 @@ class MyApplication {
 
     MenuManager.getManager();
     CreateSymLink.create();
-
   }
 }
 
