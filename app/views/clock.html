@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html ng-app="config">
+<html ng-app="clock">
 <head>
   <title></title>
   <style>
   body {
     -webkit-app-region: drag;
-    font-size: 14px;
-    color: #DDDDDD;
+    font-size: 96px;
+    color: #FFFFFF;
     margin: 0px;
+    font-weight: bold;
   }
 </style>
 <script src="./Script.js"></script>
 <script>
-var s = new Script("config", "ps acux | grep -v grep | sort -r -k 3 | head -10 | awk '{print $2,$3,$4,$11;};'", 1000);
+var s = new Script("clock", "date '+%H:%M:%S'", 1000);
 s.exec();
 </script>
 </head>
 <body>
   <div ng-controller="stdout">
-    <pre>{{ data }} {{ error }}</pre>
+    <pre>{{ data }}{{ error }}</pre>
   </div>
 </body>
 </html>
